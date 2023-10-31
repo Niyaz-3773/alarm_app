@@ -130,7 +130,7 @@ class _AddMedState extends State<AddMed> {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: const BorderSide(
-                            color: Colors.grey,
+                            color: Colors.grey,  
                             width: 2.0,
                           ),
                           ),

@@ -499,6 +499,5 @@ class _DeviceSettingState extends State<DeviceSetting> {
           ) ,
       ),
     );
-  }
-  
+  } 
 }

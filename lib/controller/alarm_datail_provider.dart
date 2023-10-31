@@ -9,7 +9,7 @@ class AlarmDetailProvider extends ChangeNotifier{
   String unit='ml';
   String medName='';
   DateTime time=DateTime.now();
-  late String dosage='00';
+  String dosage='00';
 
   void addAlarm(AlarmModel alarm) {
     alarmList.add(alarm);
