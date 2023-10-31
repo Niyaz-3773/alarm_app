@@ -136,7 +136,7 @@ class _AddMedState extends State<AddMed> {
                           ),
                         ),
                         onChanged: (value) {
-                          alarmDatail.setMedName(value);
+                          alarmDatail.setMedName(value); 
                         }
                       ),
                     ),
