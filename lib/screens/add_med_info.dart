@@ -1,4 +1,3 @@
-
 import 'package:alarm_app/model/alarm_dateils_model.dart';
 import 'package:alarm_app/screens/varidose_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -206,60 +205,60 @@ class _AddMedState extends State<AddMed> {
   }
 
   _setDateAndTimeContainer(AlarmDetailProvider alarmDatail){
-    return GestureDetector(
-      onTap: () {  
-        _setDateAndTime(context,alarmDatail);
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Set time & dose',
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.grey
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Set time & dose',
+          style: TextStyle(
+            fontSize: 15,
+            color: Colors.grey
           ),
-            const SizedBox(height: 4,),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 11),
-              height: 44,
-              decoration: BoxDecoration(
-                borderRadius:const BorderRadius.all(Radius.circular(20)),
-                border: Border.all(
-                  color: Colors.black.withOpacity(0.2),
-                  width: 1.0
-                )
-              ),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        DateFormat.jm().format(alarmDatail.time),
-                        style:const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: Colors.black
-                        ),
+        ),
+        const SizedBox(height: 4,),
+        GestureDetector(
+          onTap: () {  
+            _setDateAndTime(context,alarmDatail);
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 11),
+            height: 44,
+            decoration: BoxDecoration(
+              borderRadius:const BorderRadius.all(Radius.circular(20)),
+              border: Border.all(
+                color: Colors.black.withOpacity(0.2),
+                width: 1.0
+              )
+            ),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      DateFormat.jm().format(alarmDatail.time),
+                      style:const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: Colors.black
                       ),
-                      Text(
-                        '${alarmDatail.dosage} ${alarmDatail.unit}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15,
-                          color: Colors.black
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                    Text(
+                      '${alarmDatail.dosage} ${alarmDatail.unit}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                        color: Colors.black
+                      ),
+                    )
+                  ],
                 ),
               ),
+            ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -519,12 +518,12 @@ class _SetTimeAndDoseState extends State<SetTimeAndDose> {
                     height: 100,
                     width: 200,
                     child: CupertinoDatePicker(
-                        initialDateTime: alarmDetail.time,
-                        mode: CupertinoDatePickerMode.time,
-                        onDateTimeChanged: (time){
-                          alarmDetail.setTime(time);
-                        }, 
-                        ),
+                      initialDateTime: alarmDetail.time,
+                      mode: CupertinoDatePickerMode.time,
+                      onDateTimeChanged: (time){
+                        alarmDetail.setTime(time);
+                      }, 
+                    ),
                   ),
                   
                 ],
