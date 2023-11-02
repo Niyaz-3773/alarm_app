@@ -47,16 +47,16 @@ class _AddMedState extends State<AddMed> {
     setState(() {
       if(specificDaysList.contains(value)){
         print('removing $value');
-        specificDaysList.remove(value);
-        print('after removing $specificDaysList');
+        // specificDaysList.remove(value);
+        // print('after removing $specificDaysList');
       }else{
         specificDaysList.add(value);
-        print('added $value');
-        print(specificDaysList);
+        // print('added $value');
+        // print(specificDaysList);
       }
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AlarmDetailProvider>(
