@@ -18,6 +18,7 @@ class _AddMedState extends State<AddMed> {
   String _selectedButton='daily';
   final TextEditingController _madicineNameController=TextEditingController();
   int _days=0;
+  List specificDaysList=[];
   
 
   void _decrementIntervalDays(){
@@ -41,6 +42,21 @@ class _AddMedState extends State<AddMed> {
       }
     });
   }
+
+  void _manageSpecificDays(value){
+    setState(() {
+      if(specificDaysList.contains(value)){
+        print('removing $value');
+        specificDaysList.remove(value);
+        print('after removing $specificDaysList');
+      }else{
+        specificDaysList.add(value);
+        print('added $value');
+        print(specificDaysList);
+      }
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Consumer<AlarmDetailProvider>(
@@ -277,19 +293,19 @@ class _AddMedState extends State<AddMed> {
               width: 350,
               child:Row(
               children: [
-                _customCircle('S'),
+                _customCircle('S',0),
                 const SizedBox(width: 3,),
-                _customCircle('M'),
+                _customCircle('M',1),
                 const SizedBox(width: 3,),
-                _customCircle('T'),
+                _customCircle('T',2),
                 const SizedBox(width: 3,),
-                _customCircle('W'),
+                _customCircle('W',3),
                 const SizedBox(width: 3,),
-                _customCircle('T'),
+                _customCircle('T',4),
                 const SizedBox(width: 3,),
-                _customCircle('F'),
+                _customCircle('F',5),
                 const SizedBox(width: 3,),
-                _customCircle('S'),
+                _customCircle('S',6),
                 const SizedBox(width: 3,),                
               ],
             )    
@@ -299,27 +315,35 @@ class _AddMedState extends State<AddMed> {
     );
   }
 
- _customCircle(String day){
-    return Container(
-      alignment: Alignment.center,
-      height: 44,
-      width: 44,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: Colors.black.withOpacity(0.2),
-            width: 1.0
-          )
-      ),
-      child: Text(
-        day,
-        style: const TextStyle(
-        fontWeight: FontWeight.w500,
-        fontSize: 15,
-        color: Colors.grey
-      ),
-      ),
-      
+ _customCircle(String day, int value){
+    return GestureDetector(
+        onTap: () {
+          _manageSpecificDays(value);
+        },
+        child: Container(
+          alignment: Alignment.center,
+          height: 44,
+          width: 44,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.black.withOpacity(0.2),
+                width: 1.0
+              ),
+              color:  specificDaysList.contains(value) 
+                    ?  const Color.fromARGB(255, 97, 232, 234) 
+                    : Colors.white,
+          ),
+          child: Text(
+            day,
+            style:TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 15,
+            color:  specificDaysList.contains(value) ?Colors.black : Colors.grey,
+          ),
+          ),
+          
+        ),
     );
   }
 
