@@ -2,8 +2,8 @@ import 'package:alarm_app/home_pages/faqs_screen.dart';
 import 'package:alarm_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
-class VaridoseHomePage extends StatelessWidget {
-  const VaridoseHomePage({super.key});
+class BuyVaridosePage extends StatelessWidget {
+  const BuyVaridosePage({super.key});
 
   @override
   Widget build(BuildContext context) {
