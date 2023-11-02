@@ -3,7 +3,7 @@ import 'package:alarm_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'controller/alarm_datail_provider.dart';
-import 'home_pages/varidose_page.dart';
+import 'home_pages/varidose_home_page.dart';
 
 
 void main(){

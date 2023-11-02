@@ -91,10 +91,7 @@ class _AddMedState extends State<AddMed> {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              color:Colors.white,
+            padding: EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width*0.07 ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
@@ -170,8 +167,7 @@ class _AddMedState extends State<AddMed> {
                   if(_selectedButton != 'asNeeded')
                    _setDateAndTimeContainer(alarmDatail),          
                 ],
-              ) ,
-            ),
+            ) ,
           ),
         ),
       ),
@@ -347,7 +343,7 @@ class _AddMedState extends State<AddMed> {
               child:Row(
               children: [
                 _intervalIncreAndDecreButton(Icons.remove),
-                const SizedBox(width: 5,),
+                const SizedBox(width: 10,),
                 Container(
                   height: 44,
                   width: 230,
@@ -367,7 +363,7 @@ class _AddMedState extends State<AddMed> {
                     ),
                   ),  
                  ),
-                 const SizedBox(width: 5,),
+                 const SizedBox(width: 8,),
                  _intervalIncreAndDecreButton(Icons.add),                                 
               ],
             )    
