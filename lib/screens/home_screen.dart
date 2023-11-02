@@ -112,16 +112,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 15,
                                 width: 200,
                                 child: Text(
-                                  'Take ${item.dosage}${item.unit} from cabinet ${alarmDetail.cabinateNum}',
+                                 item.dosage=='00' ? 'No dose added'
+                                  : 'Take ${item.dosage}${item.unit} from cabinet ${alarmDetail.cabinateNum}',
                                   style: TextStyle(
-                                    fontSize: 13,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                     color: Colors.grey.withOpacity(0.9)                                   
-                                  ),
-                                  
+                                  ), 
                                 ),
                               ),
-                              )
+                              ),
+
                           ],
                         ),
                       ),
