@@ -1,4 +1,5 @@
 import 'package:alarm_app/home_pages/faqs_screen.dart';
+import 'package:alarm_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class VaridoseHomePage extends StatelessWidget {
@@ -88,6 +89,10 @@ class VaridoseHomePage extends StatelessWidget {
             if(text=='Buy Varidose'){
               Navigator.push(context,
               MaterialPageRoute(builder: (context) =>const FaqsPage())
+              );
+            }else{
+              Navigator.push(context,
+              MaterialPageRoute(builder: (context) =>const HomeScreen())
               );
             }
           },
