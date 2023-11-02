@@ -46,7 +46,7 @@ class _AddMedState extends State<AddMed> {
   void _manageSpecificDays(value){
     setState(() {
       if(specificDaysList.contains(value)){
-        print('removing $value');
+        // print('removing $value');
         // specificDaysList.remove(value);
         // print('after removing $specificDaysList');
       }else{
