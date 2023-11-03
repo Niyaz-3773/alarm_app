@@ -47,7 +47,7 @@ class _AddMedState extends State<AddMed> {
     setState(() {
       if(specificDaysList.contains(value)){
         // print('removing $value');
-        // specificDaysList.remove(value);
+        specificDaysList.remove(value);
         // print('after removing $specificDaysList');
       }else{
         specificDaysList.add(value);
@@ -124,7 +124,7 @@ class _AddMedState extends State<AddMed> {
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 3),
                     height: 47,
-                    width: 440, 
+                    width: MediaQuery.of(context).size.width*0.9, 
                     child: TextFormField(
                       controller: _madicineNameController,
                       style:const TextStyle(color: Colors.black,fontSize: 16),
@@ -191,11 +191,7 @@ class _AddMedState extends State<AddMed> {
   }
 
   Widget customRadio(String value, String title) {
-    return GestureDetector(
-      onTap: () {
-        _handleRadioButton(value);
-      },
-      child: Row(
+    return Row(
         children: [
           Radio<String>(
             value: value,
@@ -212,8 +208,7 @@ class _AddMedState extends State<AddMed> {
             ),
             ),
         ],
-      ),
-    );
+      );
   }
 
   _setDateAndTimeContainer(AlarmDetailProvider alarmDatail){
@@ -228,7 +223,7 @@ class _AddMedState extends State<AddMed> {
           ),
         ),
         const SizedBox(height: 4,),
-        GestureDetector(
+        InkWell(
           onTap: () {  
             _setDateAndTime(context,alarmDatail);
           },
@@ -290,23 +285,23 @@ class _AddMedState extends State<AddMed> {
           const SizedBox(height: 4,),
           SizedBox(
               height: 45,
-              width: 350,
+              width: MediaQuery.of(context).size.width*0.9,
               child:Row(
               children: [
                 _customCircle('S',0),
-                const SizedBox(width: 3,),
+                const SizedBox(width: 4,),
                 _customCircle('M',1),
-                const SizedBox(width: 3,),
+                const SizedBox(width: 4,),
                 _customCircle('T',2),
-                const SizedBox(width: 3,),
+                const SizedBox(width: 4,),
                 _customCircle('W',3),
-                const SizedBox(width: 3,),
+                const SizedBox(width: 4,),
                 _customCircle('T',4),
-                const SizedBox(width: 3,),
+                const SizedBox(width: 4,),
                 _customCircle('F',5),
-                const SizedBox(width: 3,),
+                const SizedBox(width: 4,),
                 _customCircle('S',6),
-                const SizedBox(width: 3,),                
+                const SizedBox(width: 4,),                
               ],
             )    
           ),
@@ -316,14 +311,14 @@ class _AddMedState extends State<AddMed> {
   }
 
  _customCircle(String day, int value){
-    return GestureDetector(
+    return InkWell(
         onTap: () {
           _manageSpecificDays(value);
         },
         child: Container(
           alignment: Alignment.center,
-          height: 44,
-          width: 44,
+          height: 45,
+          width: 45,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
@@ -363,14 +358,14 @@ class _AddMedState extends State<AddMed> {
           const SizedBox(height: 4,),
           SizedBox(
               height: 45,
-              width: 350,
+              width: MediaQuery.of(context).size.width*0.9,
               child:Row(
               children: [
                 _intervalIncreAndDecreButton(Icons.remove),
-                const SizedBox(width: 10,),
+                const SizedBox(width: 8,),
                 Container(
                   height: 44,
-                  width: 230,
+                  width:MediaQuery.of(context).size.width*0.6,
                   decoration: BoxDecoration(
                     borderRadius:const BorderRadius.all(Radius.circular(20)),
                     border: Border.all(

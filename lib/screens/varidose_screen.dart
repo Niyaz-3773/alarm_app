@@ -56,15 +56,12 @@ class _VaridosePageState extends State<VaridosePage> {
       
          body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              color: Colors.white,
+            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.08),         
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
                   const SizedBox(height: 10,),
-                 const Text(
+                  const Text(
                     'Select the cabinet number',
                     style:  TextStyle(
                       fontSize: 15,
@@ -135,7 +132,6 @@ class _VaridosePageState extends State<VaridosePage> {
                      const SizedBox(height: 25,),
                      SizedBox(
                       height: 60,
-                      width: 400,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -190,8 +186,7 @@ class _VaridosePageState extends State<VaridosePage> {
                         ),
                       ),
                     ),
-                  ],
-                ),
+              ],
             ), 
           ),
         ),
