@@ -97,10 +97,7 @@ class _PairedVaridoseState extends State<PairedVaridose> {
 
                 ],
               );
-            }),
-              
-          
-            
+            }),       
         ),
       ), 
     );
