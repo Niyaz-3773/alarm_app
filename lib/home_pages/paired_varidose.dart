@@ -1,4 +1,5 @@
 
+import 'package:alarm_app/home_pages/wifi_available_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -28,11 +29,7 @@ class _PairedVaridoseState extends State<PairedVaridose> {
                 fontSize: 16
               ),
               ),
-            ),
-            leading: IconButton(
-              onPressed: (){Navigator.pop(context);},
-              icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black,size: 15,)
-            ),
+            ),         
         ),
         body:Container(
           color: Colors.white,
@@ -169,18 +166,25 @@ class _PairedVaridoseState extends State<PairedVaridose> {
             ),
           ),
           const SizedBox(height: 7,),
-          Container(
-            alignment: Alignment.center,
-            height: MediaQuery.of(context).size.height*0.07,
-            decoration:const BoxDecoration(
-              color: Color.fromARGB(255, 97, 232, 234),
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-            ),
-            child:const Text(
-              'Connect',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w500
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+              MaterialPageRoute(builder: (context) =>WifiAvailablePage())
+              );
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: MediaQuery.of(context).size.height*0.07,
+              decoration:const BoxDecoration(
+                color: Color.fromARGB(255, 97, 232, 234),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child:const Text(
+                'Connect',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500
+                ),
               ),
             ),
           )
