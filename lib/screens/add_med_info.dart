@@ -46,13 +46,9 @@ class _AddMedState extends State<AddMed> {
   void _manageSpecificDays(value){
     setState(() {
       if(specificDaysList.contains(value)){
-        // print('removing $value');
         specificDaysList.remove(value);
-        // print('after removing $specificDaysList');
       }else{
         specificDaysList.add(value);
-        // print('added $value');
-        // print(specificDaysList);
       }
     });
   }
@@ -64,16 +60,15 @@ class _AddMedState extends State<AddMed> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
-          title: const Center(
-            child:  Text(
-              'Add Medicine Info',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-                color: Colors.black
-              ),
+          title: const Text(
+            'Add Medicine Info',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+              color: Colors.black
             ),
-          ), 
+          ),
+          centerTitle: true,
           actions: [
             TextButton(
             onPressed: (){

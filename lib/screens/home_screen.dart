@@ -163,13 +163,13 @@ class _HomeScreenState extends State<HomeScreen> {
         //bottom Nav Bar
         bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
-          if(index==3){
-            Navigator.push(context,
-            MaterialPageRoute(builder: (context) =>const DeviceSetting())
-            );
-          }else if(index==2){
+          if(index==2){
             Navigator.push(context,
             MaterialPageRoute(builder: (context) =>const AddMed())
+            );
+          }else if(index==3){
+            Navigator.push(context,
+            MaterialPageRoute(builder: (context) =>const DeviceSetting())
             );
           }
         },

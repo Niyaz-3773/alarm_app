@@ -1,9 +1,7 @@
 import 'package:alarm_app/home_pages/paired_varidose.dart';
-import 'package:alarm_app/screens/varidose_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'controller/alarm_datail_provider.dart';
-import 'home_pages/buy_varidose_page.dart';
 
 
 void main(){

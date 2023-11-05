@@ -10,6 +10,8 @@ class AlarmDetailProvider extends ChangeNotifier{
   String medName='';
   DateTime time=DateTime.now();
   String dosage='00';
+  String selectedStrength='Medium';
+  String selectedTune='Rooster';
 
   void addAlarm(AlarmModel alarm) {
     alarmList.add(alarm);
@@ -38,6 +40,16 @@ class AlarmDetailProvider extends ChangeNotifier{
 
   void setTime(DateTime value){
     time=value;
+    notifyListeners();
+  }
+
+  void selectStrength(String value){
+    selectedStrength=value;
+    notifyListeners();
+  }
+
+  void selectTune(String value){
+    selectedTune=value;
     notifyListeners();
   }
 }

@@ -12,16 +12,15 @@ class BuyVaridosePage extends StatelessWidget {
         appBar:  AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
-          title: const Center(
-            child:  Text(
-              'Varidose',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-                color: Colors.black
-              ),
+          title: const Text(
+            'Varidose',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+              color: Colors.black
             ),
           ), 
+          centerTitle: true,
           leading:IconButton(
             onPressed: (){
               Navigator.pop(context);

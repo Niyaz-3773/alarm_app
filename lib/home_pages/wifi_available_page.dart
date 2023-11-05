@@ -12,19 +12,18 @@ class WifiAvailablePage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        title: const Center(
-          child: Text(
-            'WiFi available',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 16
-            ),
-            ),
+        title:const Text(
+          'WiFi available',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 16
           ),
-          leading: IconButton(
-            onPressed: (){Navigator.pop(context);},
-            icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black,size: 15,)
-          ),
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: (){Navigator.pop(context);},
+          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black,size: 15,)
+        ),
       ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,

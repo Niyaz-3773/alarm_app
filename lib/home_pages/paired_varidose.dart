@@ -21,15 +21,14 @@ class _PairedVaridoseState extends State<PairedVaridose> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
-          title: const Center(
-            child: Text(
-              'Paired Varidoses',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16
-              ),
-              ),
-            ),         
+          title: const Text(
+            'Paired Varidoses',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 16
+            ),
+          ), 
+          centerTitle: true,        
         ),
         body:Container(
           color: Colors.white,

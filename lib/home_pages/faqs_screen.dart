@@ -17,17 +17,16 @@ class _FaqsPageState extends State<FaqsPage> {
         appBar:  AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        title: const Center(
-          child:  Text(
-            'FAQs',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-              color: Colors.black,
-              letterSpacing:0.1
-            ),
-          ),
-        ), 
+        title: const Text(
+          'FAQs',
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+            color: Colors.black,
+            letterSpacing:0.1
+          ),     
+        ),
+        centerTitle: true, 
         leading:IconButton(
           onPressed: (){
             Navigator.pop(context);

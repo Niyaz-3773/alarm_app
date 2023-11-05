@@ -1,4 +1,6 @@
+import 'package:alarm_app/controller/alarm_datail_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DeviceSetting extends StatefulWidget {
   const DeviceSetting({super.key});
@@ -9,7 +11,6 @@ class DeviceSetting extends StatefulWidget {
 
 class _DeviceSettingState extends State<DeviceSetting> {
  bool _switchValue=false;
-
   
   @override
   Widget build(BuildContext context) {
@@ -18,19 +19,18 @@ class _DeviceSettingState extends State<DeviceSetting> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
-          title: const Center(
-            child: Text(
-              'Device Setting',
+          title: const  Text(
+            'Device Setting',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 16
               ),
-              ),
+            ),
+            centerTitle: true,
+          leading: IconButton(
+            onPressed: (){Navigator.pop(context);},
+            icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black,size: 15,)
           ),
-            leading: IconButton(
-              onPressed: (){Navigator.pop(context);},
-              icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black,size: 15,)
-              ),
         ),
     
         body: SingleChildScrollView(
@@ -150,8 +150,43 @@ class _DeviceSettingState extends State<DeviceSetting> {
                         const SizedBox(height: 15,),
                         _alarmSetting('Alarm strength', 'Louder'),
                       
+                       //Snooz
                         const SizedBox(height: 15,),
-                        _alarmSetting('Snooz','5min'),
+                        Text(
+                          'Snooz',
+                          style: TextStyle(
+                            fontSize: 17,
+                            color: Colors.black.withOpacity(0.5)
+                          ),
+                        ),
+                        const SizedBox(height: 5,),
+                        Container(
+                          height: 60,
+                          decoration: BoxDecoration(
+                            borderRadius:const BorderRadius.all(Radius.circular(20)),
+                            border: Border.all(
+                              color: Colors.black.withOpacity(0.1),
+                              width: 1.0
+                            )
+                          ),      
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children:[
+                                Text(
+                                  '5 min',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                    color: Colors.black.withOpacity(0.7)
+                                  ),
+                                ),
+                                const Icon(Icons.keyboard_arrow_down)                   
+                              ],
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                 ),
@@ -285,57 +320,60 @@ class _DeviceSettingState extends State<DeviceSetting> {
 
   _alarmSetting(String lable1,String lable2){
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(
-          lable1,
-          style: TextStyle(
-            fontSize: 17,
-            color: Colors.black.withOpacity(0.5)
-          ),
-        ),
-
-        const SizedBox(height: 5,),
-        GestureDetector(
-          onTap: () {
-            if(lable1 == 'Alarm tune'){     
-              _showAlarmTuneBottomSheet(context);
-            }else if(lable1=='Alarm strength'){
-              _showAlarmStrengthBottomSheet(context);
-            }    
-          },
-          
-          child: Container(
-            height: 60,
-            decoration: BoxDecoration(
-              borderRadius:const BorderRadius.all(Radius.circular(20)),
-              border: Border.all(
-                color: Colors.black.withOpacity(0.1),
-                width: 1.0
-              )
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            lable1,
+            style: TextStyle(
+              fontSize: 17,
+              color: Colors.black.withOpacity(0.5)
             ),
+          ),
     
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    lable2,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                      color: Colors.black.withOpacity(0.7)
-                    ),
+          const SizedBox(height: 5,),
+          GestureDetector(
+            onTap: () {
+              if(lable1 == 'Alarm tune'){     
+                _showAlarmTuneBottomSheet(context);
+              }else if(lable1=='Alarm strength'){
+                _showAlarmStrengthBottomSheet(context);
+              }    
+            },         
+            child: Consumer<AlarmDetailProvider>(
+              builder:(context, alarmDetail, child) =>  Container(
+                height: 60,
+                decoration: BoxDecoration(
+                  borderRadius:const BorderRadius.all(Radius.circular(20)),
+                  border: Border.all(
+                    color: Colors.black.withOpacity(0.1),
+                    width: 1.0
+                  )
+                ),
+                  
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children:[
+                      Text(
+                        lable1=='Alarm tune'
+                        ? alarmDetail.selectedTune
+                        :alarmDetail.selectedStrength,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                          color: Colors.black.withOpacity(0.7)
+                        ),
+                      ),
+                      const Icon(Icons.keyboard_arrow_down)                   
+                    ],
                   ),
-                  const Icon(Icons.keyboard_arrow_down)                   
-                ],
+                ),
               ),
             ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
   }
 
   void _showAlarmTuneBottomSheet(BuildContext context) {
@@ -368,93 +406,128 @@ class _DeviceSettingState extends State<DeviceSetting> {
     );
   }
 
-    _bottomSheetContent(String lable1,String lable2,String lable3,String lable4){
-    return Padding(
-      padding:const EdgeInsets.symmetric(horizontal: 25,vertical: 20),
-      child: SizedBox(
-        height: 250,
-          child:Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              IconButton(
-                onPressed:(){
-                  Navigator.pop(context);
-                },
-                icon:const Icon(Icons.arrow_back_ios),         
-              ),
-              Center(
-                child: Container(
-                  height: 200,
-                  width: 150,
-                  
-                  alignment: Alignment.center,
-                  child: Column(
-                    children: [
-                      Text(
-                        lable1,
-                        style:const TextStyle(
-                          fontSize: 17,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600
-                        ),
-                      ),
-                      
-                     const SizedBox(height: 20,),
-                      Text(
-                        lable2,
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black.withOpacity(0.3),
-                          fontWeight: FontWeight.w500
-                        ),
-                      ),
-
-                    const SizedBox(height: 8,),
-                      
-                     const SizedBox(
-                        width: 70,
-
-                        child:  Divider(
-                            color: Colors.grey,
-                            thickness: 1,
-                          ),
-                      ),
-
-                      const SizedBox(height: 8,),
-                      Text(
-                        lable3,
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black.withOpacity(0.8),
-                          fontWeight: FontWeight.w500
-                        ),
-                      ),
-
-                     const SizedBox(height: 8,),
-                      
-                      const SizedBox(
-                        width: 70,
-                        child: Divider(
-                            color: Colors.grey,
-                            thickness: 1,
-                          ),
-                      ),
-                      const SizedBox(height: 8,),
-                      Text(
-                        lable4,
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black.withOpacity(0.3),
-                          fontWeight: FontWeight.w500
-                        ),
-                      ),
-
-                    ],
-                  ),
+    _bottomSheetContent(String lable,String lable1,String lable2,String lable3){
+    return Consumer<AlarmDetailProvider>(
+      builder:(context,alarmDetail,child) => Padding(
+        padding:const EdgeInsets.symmetric(horizontal: 25,vertical: 20),
+        child: SizedBox(
+          height: 250,
+            child:Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                IconButton(
+                  onPressed:(){
+                    Navigator.pop(context);
+                  },
+                  icon:const Icon(Icons.arrow_back_ios),         
                 ),
-              )
-            ],
-          ) ,
+                Center(
+                  child: Container(
+                    height: 200,
+                    width: 150,
+                    
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: [
+                        Text(
+                          lable,
+                          style:const TextStyle(
+                            fontSize: 17,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600
+                          ),
+                        ),
+                        
+                       const SizedBox(height: 20,),
+                        TextButton(
+                          onPressed: () {
+                            if(lable=='Select tune'){
+                               alarmDetail.selectTune(lable1);
+                            }else{
+                                alarmDetail.selectStrength(lable1);
+                            }
+                          },
+                          child: Text(
+                            lable1,
+                            style: TextStyle(
+                              fontSize: 15,
+                              color:  alarmDetail.selectedStrength==lable1 || alarmDetail.selectedTune==lable1
+                              ? Colors.black
+                              : Colors.black.withOpacity(0.3),
+                              fontWeight: FontWeight.w500
+                            ),
+                          ),
+                        ),
+    
+                      const SizedBox(height: 8,),
+                        
+                       const SizedBox(
+                          width: 70,
+    
+                          child:  Divider(
+                              color: Colors.grey,
+                              thickness: 1,
+                            ),
+                        ),
+    
+                        const SizedBox(height: 8,),
+                        TextButton(
+                          onPressed: () {
+                            if(lable=='Select tune'){
+                               alarmDetail.selectTune(lable2);
+                            }else{
+                                alarmDetail.selectStrength(lable2);
+                            }
+                          },
+                          child: Text(
+                            lable2,
+                            style: TextStyle(
+                              fontSize: 15,
+                              color:  alarmDetail.selectedStrength==lable2 || alarmDetail.selectedTune==lable2
+                              ? Colors.black
+                              : Colors.black.withOpacity(0.3),
+                              fontWeight: FontWeight.w500
+                            ),
+                          ),
+                        ),
+    
+                       const SizedBox(height: 8,),
+                        
+                        const SizedBox(
+                          width: 70,
+                          child: Divider(
+                              color: Colors.grey,
+                              thickness: 1,
+                            ),
+                        ),
+                        const SizedBox(height: 8,),
+                        TextButton(
+                          onPressed: () {
+                            if(lable=='Select tune'){
+                               alarmDetail.selectTune(lable3);
+                            }else{
+                                alarmDetail.selectStrength(lable3);
+                            }
+                          },
+                          child: Text(
+                            lable3,
+                            style: TextStyle(
+                              fontSize: 15,
+                              color:  alarmDetail.selectedStrength==lable3 || alarmDetail.selectedTune==lable3
+                              ? Colors.black
+                              : Colors.black.withOpacity(0.3),
+                              fontWeight: FontWeight.w500
+                            ),
+                          ),
+                        ),
+    
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ) ,
+        ),
       ),
     );
   } 
