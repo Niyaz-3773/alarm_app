@@ -18,7 +18,7 @@ class WifiAvailablePage extends StatelessWidget {
             color: Colors.black,
             fontSize: 16
           ),
-        ),
+        ), 
         centerTitle: true,
         leading: IconButton(
           onPressed: (){Navigator.pop(context);},
@@ -62,7 +62,6 @@ class WifiAvailablePage extends StatelessWidget {
         ),
 
       ),
-
     );
   }
 
