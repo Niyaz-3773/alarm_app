@@ -32,7 +32,6 @@ class _DeviceSettingState extends State<DeviceSetting> {
             icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black,size: 15,)
           ),
         ),
-    
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width*0.04, ),
@@ -320,60 +319,60 @@ class _DeviceSettingState extends State<DeviceSetting> {
 
   _alarmSetting(String lable1,String lable2){
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            lable1,
-            style: TextStyle(
-              fontSize: 17,
-              color: Colors.black.withOpacity(0.5)
-            ),
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          lable1,
+          style: TextStyle(
+            fontSize: 17,
+            color: Colors.black.withOpacity(0.5)
           ),
-    
-          const SizedBox(height: 5,),
-          GestureDetector(
-            onTap: () {
-              if(lable1 == 'Alarm tune'){     
-                _showAlarmTuneBottomSheet(context);
-              }else if(lable1=='Alarm strength'){
-                _showAlarmStrengthBottomSheet(context);
-              }    
-            },         
-            child: Consumer<AlarmDetailProvider>(
-              builder:(context, alarmDetail, child) =>  Container(
-                height: 60,
-                decoration: BoxDecoration(
-                  borderRadius:const BorderRadius.all(Radius.circular(20)),
-                  border: Border.all(
-                    color: Colors.black.withOpacity(0.1),
-                    width: 1.0
-                  )
-                ),
-                  
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children:[
-                      Text(
-                        lable1=='Alarm tune'
-                        ? alarmDetail.selectedTune
-                        :alarmDetail.selectedStrength,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                          color: Colors.black.withOpacity(0.7)
-                        ),
+        ),
+  
+        const SizedBox(height: 5,),
+        GestureDetector(
+          onTap: () {
+            if(lable1 == 'Alarm tune'){     
+              _showAlarmTuneBottomSheet(context);
+            }else if(lable1=='Alarm strength'){
+              _showAlarmStrengthBottomSheet(context);
+            }    
+          },         
+          child: Consumer<AlarmDetailProvider>(
+            builder:(context, alarmDetail, child) =>  Container(
+              height: 60,
+              decoration: BoxDecoration(
+                borderRadius:const BorderRadius.all(Radius.circular(20)),
+                border: Border.all(
+                  color: Colors.black.withOpacity(0.1),
+                  width: 1.0
+                )
+              ),
+                
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:[
+                    Text(
+                      lable1=='Alarm tune'
+                      ? alarmDetail.selectedTune
+                      :alarmDetail.selectedStrength,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                        color: Colors.black.withOpacity(0.7)
                       ),
-                      const Icon(Icons.keyboard_arrow_down)                   
-                    ],
-                  ),
+                    ),
+                    const Icon(Icons.keyboard_arrow_down)                   
+                  ],
                 ),
               ),
             ),
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 
   void _showAlarmTuneBottomSheet(BuildContext context) {
@@ -406,7 +405,7 @@ class _DeviceSettingState extends State<DeviceSetting> {
     );
   }
 
-    _bottomSheetContent(String lable,String lable1,String lable2,String lable3){
+  _bottomSheetContent(String title,String lable1,String lable2,String lable3){
     return Consumer<AlarmDetailProvider>(
       builder:(context,alarmDetail,child) => Padding(
         padding:const EdgeInsets.symmetric(horizontal: 25,vertical: 20),
@@ -430,7 +429,7 @@ class _DeviceSettingState extends State<DeviceSetting> {
                     child: Column(
                       children: [
                         Text(
-                          lable,
+                          title,
                           style:const TextStyle(
                             fontSize: 17,
                             color: Colors.black,
@@ -441,7 +440,7 @@ class _DeviceSettingState extends State<DeviceSetting> {
                        const SizedBox(height: 20,),
                         TextButton(
                           onPressed: () {
-                            if(lable=='Select tune'){
+                            if(title=='Select tune'){
                                alarmDetail.selectTune(lable1);
                             }else{
                                 alarmDetail.selectStrength(lable1);
@@ -473,7 +472,7 @@ class _DeviceSettingState extends State<DeviceSetting> {
                         const SizedBox(height: 8,),
                         TextButton(
                           onPressed: () {
-                            if(lable=='Select tune'){
+                            if(title=='Select tune'){
                                alarmDetail.selectTune(lable2);
                             }else{
                                 alarmDetail.selectStrength(lable2);
@@ -503,7 +502,7 @@ class _DeviceSettingState extends State<DeviceSetting> {
                         const SizedBox(height: 8,),
                         TextButton(
                           onPressed: () {
-                            if(lable=='Select tune'){
+                            if(title=='Select tune'){
                                alarmDetail.selectTune(lable3);
                             }else{
                                 alarmDetail.selectStrength(lable3);
