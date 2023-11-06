@@ -10,7 +10,10 @@ class DeviceSetting extends StatefulWidget {
 }
 
 class _DeviceSettingState extends State<DeviceSetting> {
- bool _switchValue=false;
+ bool _setVactionTimeSwitch=false;
+ bool _showMedNameSwitch=false;
+ bool _autoFillSwitch=false;
+ bool _addSorryTimeSwitch=false; 
   
   @override
   Widget build(BuildContext context) {
@@ -42,7 +45,7 @@ class _DeviceSettingState extends State<DeviceSetting> {
                 SizedBox(height:MediaQuery.of(context).size.height*0.04,),    
                 Container(
                   decoration: BoxDecoration(
-                    border: _switchValue ?
+                    border: _setVactionTimeSwitch ?
                       Border(
                         top: BorderSide(color: Colors.blue.withOpacity(0.8), width: 1.0),
                         right: BorderSide(color: Colors.blue.withOpacity(0.8), width: 1.0),
@@ -60,25 +63,25 @@ class _DeviceSettingState extends State<DeviceSetting> {
                         fontSize: 15
                       ),
                     ),
-                    value: _switchValue,
+                    value: _setVactionTimeSwitch,
                     onChanged: (bool value) {
-                      setState(() => _switchValue=value);
+                      setState(() => _setVactionTimeSwitch=value);
                     }
                   ),               
                ),
                 
-                if (_switchValue) 
+                if (_setVactionTimeSwitch) 
                   _switchOnContainer(),
 
               const SizedBox(height: 5,),
-              _switches('Show meds name'),
+              _switches('Show meds name',_showMedNameSwitch),
 
               const SizedBox(height: 5,),
-              _switches('Notify pharma to auto fill'),
+              _switches('Notify pharma to auto fill',_autoFillSwitch),
 
 
               const SizedBox(height: 5,),
-              _switches('Add sorry time'),
+              _switches('Add sorry time',_addSorryTimeSwitch),
 
               const SizedBox(height: 5,),
              
@@ -296,7 +299,7 @@ class _DeviceSettingState extends State<DeviceSetting> {
   }
 
 
-  _switches(String text){
+  _switches(String title,bool switchValue){
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -307,14 +310,24 @@ class _DeviceSettingState extends State<DeviceSetting> {
       ),
       child: SwitchListTile(
         title: Text(
-          text,
+          title,
           style: TextStyle(
             fontSize: 15,
             color: Colors.black.withOpacity(0.8)
           ),
         ),
-        value: false,
-        onChanged: null     
+        value:switchValue,
+        onChanged: (bool value) {
+          setState(() {
+            if(title=='Show meds name'){
+              _showMedNameSwitch=value;
+            }else if(title=='Add sorry time'){
+              _addSorryTimeSwitch=value;
+            }else{
+              _autoFillSwitch=value;
+            }
+          });
+        }     
       ),
     );
   }
@@ -412,7 +425,7 @@ class _DeviceSettingState extends State<DeviceSetting> {
       builder:(context,alarmDetail,child) => Padding(
         padding:const EdgeInsets.symmetric(horizontal: 25,vertical: 20),
         child: SizedBox(
-          height: 250,
+          height: MediaQuery.of(context).size.height*0.4,
             child:Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -424,8 +437,7 @@ class _DeviceSettingState extends State<DeviceSetting> {
                 ),
                 Center(
                   child: Container(
-                    height: 200,
-                    width: 150,
+                   height:MediaQuery.of(context).size.height*0.3,
                     
                     alignment: Alignment.center,
                     child: Column(
@@ -464,7 +476,6 @@ class _DeviceSettingState extends State<DeviceSetting> {
                         
                        const SizedBox(
                           width: 70,
-    
                           child:  Divider(
                               color: Colors.grey,
                               thickness: 1,
