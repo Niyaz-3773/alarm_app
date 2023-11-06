@@ -56,7 +56,7 @@ class _AddMedState extends State<AddMed> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AlarmDetailProvider>(
-      builder:(context,alarmDatail,child)=> Scaffold(
+      builder:(context,alarmDetail,child)=> Scaffold(
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
@@ -73,12 +73,12 @@ class _AddMedState extends State<AddMed> {
             TextButton(
             onPressed: (){
               AlarmModel alarm=  AlarmModel(
-                medName:alarmDatail.medName,
-                dosage:alarmDatail.dosage,
-                unit:alarmDatail.unit,
-                time : alarmDatail.time,
+                medName:alarmDetail.medName,
+                dosage:alarmDetail.dosage,
+                unit:alarmDetail.unit,
+                time : alarmDetail.time,
               );
-              alarmDatail.addAlarm(alarm);
+              alarmDetail.addAlarm(alarm);
                Navigator.push(context,
                 MaterialPageRoute(builder: (context) =>const VaridosePage())  
               );
@@ -94,7 +94,7 @@ class _AddMedState extends State<AddMed> {
           ],
           leading:IconButton(
             onPressed: (){
-              alarmDatail.alarmList.clear();
+              alarmDetail.alarmList.clear();
               Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black,size: 16,)
@@ -143,7 +143,7 @@ class _AddMedState extends State<AddMed> {
                           ),
                         ),
                         onChanged: (value) {
-                          alarmDatail.setMedName(value); 
+                          alarmDetail.setMedName(value); 
                         }
                       ),
                     ),
@@ -176,7 +176,7 @@ class _AddMedState extends State<AddMed> {
                   
                   const SizedBox(height: 20,),
                   if(_selectedButton != 'asNeeded')
-                   _setDateAndTimeContainer(alarmDatail),          
+                   _setDateAndTimeContainer(alarmDetail),          
                 ],
             ) ,
           ),
@@ -206,7 +206,7 @@ class _AddMedState extends State<AddMed> {
       );
   }
 
-  _setDateAndTimeContainer(AlarmDetailProvider alarmDatail){
+  _setDateAndTimeContainer(AlarmDetailProvider alarmDetail){
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -220,7 +220,7 @@ class _AddMedState extends State<AddMed> {
         const SizedBox(height: 4,),
         InkWell(
           onTap: () {  
-            _setDateAndTime(context,alarmDatail);
+            _setDateAndTime(context,alarmDetail);
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 11),
@@ -239,7 +239,7 @@ class _AddMedState extends State<AddMed> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      DateFormat.jm().format(alarmDatail.time),
+                      DateFormat.jm().format(alarmDetail.time),
                       style:const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
@@ -247,7 +247,7 @@ class _AddMedState extends State<AddMed> {
                       ),
                     ),
                     Text(
-                      '${alarmDatail.dosage} ${alarmDatail.unit}',
+                      '${alarmDetail.dosage} ${alarmDetail.unit}',
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 15,
@@ -441,7 +441,7 @@ class _AddMedState extends State<AddMed> {
     );
   }
 
-  void _setDateAndTime(BuildContext context,alarmDatail) {
+  void _setDateAndTime(BuildContext context,alarmDetail) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,

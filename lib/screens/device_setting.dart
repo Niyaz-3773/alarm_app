@@ -28,7 +28,9 @@ class _DeviceSettingState extends State<DeviceSetting> {
             ),
             centerTitle: true,
           leading: IconButton(
-            onPressed: (){Navigator.pop(context);},
+            onPressed: (){
+              Navigator.pop(context);
+            },
             icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black,size: 15,)
           ),
         ),

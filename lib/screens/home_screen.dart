@@ -18,8 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Consumer<AlarmDetailProvider>(
-        builder:(context,alarmDetail,child) =>Scaffold(
+      child: Scaffold(
           body: Column(
             children: [             
               //adherence score
@@ -28,105 +27,107 @@ class _HomeScreenState extends State<HomeScreen> {
                   color:const  Color.fromARGB(255, 97, 232, 234)  
               ),
               Expanded(
-                child: ListView.builder(
-                  itemCount: alarmDetail.alarmList.length,
-                  itemBuilder: (context, index) {
-                    AlarmModel item = alarmDetail.alarmList[index]; // Get the data for this item
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 4),
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * 0.17,
-                        decoration: BoxDecoration(
-                            
-                            borderRadius: BorderRadius.circular(20), // Adjust the value to control the curvature
-                            border: Border.all(
-                              color:const Color.fromARGB(255, 235, 167, 66).withOpacity(0.3), // Border color
-                              width: 2.0, // Border width
-                            ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    height: MediaQuery.of(context).size.height * 0.05,
-                                    width: MediaQuery.of(context).size.width * 0.2,
-                                      decoration: BoxDecoration(
-                                        color:const Color.fromARGB(255, 232, 181, 31).withOpacity(0.5),
-                                      borderRadius: const BorderRadius.all(Radius.circular(20)),        
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        DateFormat.jm().format(item.time),
-                                        style: TextStyle(
-                                          fontSize: 17,
-                                          color: Colors.black.withOpacity(0.9),
-                                          fontWeight: FontWeight.w500,
+                child: Consumer<AlarmDetailProvider>(
+                  builder:(context,alarmDetail,child) => ListView.builder(
+                    itemCount: alarmDetail.alarmList.length,
+                    itemBuilder: (context, index) {
+                      AlarmModel item = alarmDetail.alarmList[index]; // Get the data for this item
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 4),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.17,
+                          decoration: BoxDecoration(
+                              
+                              borderRadius: BorderRadius.circular(20), // Adjust the value to control the curvature
+                              border: Border.all(
+                                color:const Color.fromARGB(255, 235, 167, 66).withOpacity(0.3), // Border color
+                                width: 2.0, // Border width
+                              ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.height * 0.05,
+                                      width: MediaQuery.of(context).size.width * 0.2,
+                                        decoration: BoxDecoration(
+                                          color:const Color.fromARGB(255, 232, 181, 31).withOpacity(0.5),
+                                        borderRadius: const BorderRadius.all(Radius.circular(20)),        
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          DateFormat.jm().format(item.time),
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            color: Colors.black.withOpacity(0.9),
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right:10.0),
-                                  child: Container(        
-                                    color: Colors.white,
-                                    width: 30,
-                                    height: 30,
+                                  Padding(
+                                    padding: const EdgeInsets.only(right:10.0),
+                                    child: Container(        
+                                      color: Colors.white,
+                                      width: 30,
+                                      height: 30,
+                                      child: Text(
+                                        'edit',
+                                        style: TextStyle(
+                                          color: Colors.blue.withOpacity(0.5),
+                                          fontWeight: FontWeight.bold
+                                          ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding:const EdgeInsets.fromLTRB(15, 0, 10,0 ),
+                                child: Container(
+                                  color: Colors.white,
+                                  height: 20,
+                                  width: 100,
+                                
                                     child: Text(
-                                      'edit',
+                                      item.medName,
                                       style: TextStyle(
-                                        color: Colors.blue.withOpacity(0.5),
-                                        fontWeight: FontWeight.bold
-                                        ),
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.black.withOpacity(0.7)
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
-                            Padding(
-                              padding:const EdgeInsets.fromLTRB(15, 0, 10,0 ),
-                              child: Container(
-                                color: Colors.white,
-                                height: 20,
-                                width: 100,
-                              
+                              Padding(
+                                padding:const EdgeInsets.fromLTRB(15, 10, 10, 0),
+                                child: Container(
+                                  color: Colors.white,
+                                  height: 15,
+                                  width: 200,
                                   child: Text(
-                                    item.medName,
+                                   item.dosage=='00' ? 'No dose added'
+                                    : 'Take ${item.dosage}${item.unit} from cabinet ${alarmDetail.cabinateNum}',
                                     style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.black.withOpacity(0.7)
-                                    ),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.grey.withOpacity(0.9)                                   
+                                    ), 
                                   ),
                                 ),
-                              ),
-                            Padding(
-                              padding:const EdgeInsets.fromLTRB(15, 10, 10, 0),
-                              child: Container(
-                                color: Colors.white,
-                                height: 15,
-                                width: 200,
-                                child: Text(
-                                 item.dosage=='00' ? 'No dose added'
-                                  : 'Take ${item.dosage}${item.unit} from cabinet ${alarmDetail.cabinateNum}',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.grey.withOpacity(0.9)                                   
-                                  ), 
                                 ),
-                              ),
-                              ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
       
@@ -198,9 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
           ),          
           ),
-      )
-
-   );
+      );
  }
 
   void _showPopupContainer(BuildContext context) {

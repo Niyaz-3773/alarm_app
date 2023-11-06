@@ -60,7 +60,6 @@ class WifiAvailablePage extends StatelessWidget {
             }
           ),
         ),
-
       ),
     );
   }

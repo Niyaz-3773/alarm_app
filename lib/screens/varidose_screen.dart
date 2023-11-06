@@ -15,8 +15,7 @@ class _VaridosePageState extends State<VaridosePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Consumer<AlarmDetailProvider>(
-        builder:(context,alarmDetail,child) => Scaffold(
+      child: Scaffold(
           appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
@@ -191,8 +190,7 @@ class _VaridosePageState extends State<VaridosePage> {
         ),
       
         ),
-      )
-    );
+      );
   }
 
   _buildCabinetNumContainer(String text){
