@@ -18,125 +18,24 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-          body: Column(
-            children: [             
-              //adherence score
-              Container(
-                height: MediaQuery.of(context).size.height*0.2,
-                  color:const  Color.fromARGB(255, 97, 232, 234)  
-              ),
-              Expanded(
-                child: Consumer<AlarmDetailProvider>(
-                  builder:(context,alarmDetail,child) => ListView.builder(
-                    itemCount: alarmDetail.alarmList.length,
-                    itemBuilder: (context, index) {
-                      AlarmModel item = alarmDetail.alarmList[index]; // Get the data for this item
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 4),
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * 0.17,
-                          decoration: BoxDecoration(
-                              
-                              borderRadius: BorderRadius.circular(20), // Adjust the value to control the curvature
-                              border: Border.all(
-                                color:const Color.fromARGB(255, 235, 167, 66).withOpacity(0.3), // Border color
-                                width: 2.0, // Border width
-                              ),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      height: MediaQuery.of(context).size.height * 0.05,
-                                      width: MediaQuery.of(context).size.width * 0.2,
-                                        decoration: BoxDecoration(
-                                          color:const Color.fromARGB(255, 232, 181, 31).withOpacity(0.5),
-                                        borderRadius: const BorderRadius.all(Radius.circular(20)),        
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          DateFormat.jm().format(item.time),
-                                          style: TextStyle(
-                                            fontSize: 17,
-                                            color: Colors.black.withOpacity(0.9),
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right:10.0),
-                                    child: Container(        
-                                      color: Colors.white,
-                                      width: 30,
-                                      height: 30,
-                                      child: Text(
-                                        'edit',
-                                        style: TextStyle(
-                                          color: Colors.blue.withOpacity(0.5),
-                                          fontWeight: FontWeight.bold
-                                          ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding:const EdgeInsets.fromLTRB(15, 0, 10,0 ),
-                                child: Container(
-                                  color: Colors.white,
-                                  height: 20,
-                                  width: 100,
-                                
-                                    child: Text(
-                                      item.medName,
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.black.withOpacity(0.7)
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              Padding(
-                                padding:const EdgeInsets.fromLTRB(15, 10, 10, 0),
-                                child: Container(
-                                  color: Colors.white,
-                                  height: 15,
-                                  width: 200,
-                                  child: Text(
-                                   item.dosage=='00' ? 'No dose added'
-                                    : 'Take ${item.dosage}${item.unit} from cabinet ${alarmDetail.cabinateNum}',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.grey.withOpacity(0.9)                                   
-                                    ), 
-                                  ),
-                                ),
-                                ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+      child:Scaffold(
+          body: Consumer<AlarmDetailProvider>(
+            builder:(context,alarmDetail,child)=> Column(
+              children: [             
+                //adherence score
+                Container(
+                  height: MediaQuery.of(context).size.height*0.23,
+                  width: MediaQuery.of(context).size.width,
+                    color:const  Color.fromARGB(255, 97, 232, 234)  
                 ),
-              ),
-      
-      
-              //add med button
-              Container(
-              color: Colors.white,
-              child: Center(
-                child: GestureDetector(
+
+                if (alarmDetail.alarmList.isEmpty) 
+                    _initialPage()
+                else 
+                    _alarmAddedPage(alarmDetail),
+                
+                const SizedBox(height: 10,), 
+                GestureDetector(
                   onTap: () {
                     _showPopupContainer( context);
                   },
@@ -144,23 +43,25 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children:const [
                       Icon(Icons.add_box,
-                          color:Color.fromARGB(255, 97, 232, 234)),
-                        SizedBox(width: 3,),
-                        Text(
-                          'Add med',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 97, 232, 234),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700
-                          ),
-                          )
+                        color:Color.fromARGB(255, 97, 232, 234)
+                      ),
+                      SizedBox(width: 3,),
+                      Text(
+                        'Add med',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 97, 232, 234),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700
+                        ),
+                      )
                     ],
                   ),
                 ),
-              ),
-              )
-            ],
+            
+              ],
+            ),
           ),
+
         //bottom Nav Bar
         bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
@@ -200,6 +101,150 @@ class _HomeScreenState extends State<HomeScreen> {
           ),          
           ),
       );
+ }
+
+ _initialPage(){
+  return Padding(
+    padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.05),
+      child: Column(
+        children: [
+          const SizedBox(height: 20,),
+          Container(
+            height: MediaQuery.of(context).size.height*0.2,
+            decoration: BoxDecoration(           
+              borderRadius: BorderRadius.circular(20), 
+              border: Border.all(
+                color:const Color.fromARGB(255, 97, 232, 234),
+                width: 1.0, 
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Image.asset(
+                  'assets/images/medicine.jpg',
+                  height:150,
+                  width: 150,
+                ),
+                const  Text(
+                  'Add your medicine',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600
+                  ),
+                )
+                    
+              ],
+            ),
+          ),             
+          const SizedBox(height: 30,),                
+          Container(
+            height: MediaQuery.of(context).size.height*0.2,
+            decoration: BoxDecoration(           
+              borderRadius: BorderRadius.circular(20), 
+              color:const Color.fromARGB(255, 97, 232, 234)
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Image.asset(
+                  'assets/images/cabinet.jpg',
+                  height:100,
+                  width: 100,
+                ),
+                const  Text(
+                  'Pair your device',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600
+                  ),
+                )                    
+              ],
+            ),
+          )
+        ],
+      ),
+    ); 
+ }
+
+ _alarmAddedPage(AlarmDetailProvider alarmDetail){
+  return Expanded(
+    child: ListView.builder(
+      itemCount: alarmDetail.alarmList.length,
+      itemBuilder: (context, index) {
+      AlarmModel item = alarmDetail.alarmList[index]; 
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 8),
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.2,
+            padding: const EdgeInsets.fromLTRB(15,10,15,10),
+            decoration: BoxDecoration(           
+                borderRadius: BorderRadius.circular(20), 
+                border: Border.all(
+                  color:const Color.fromARGB(255, 235, 167, 66).withOpacity(0.3),
+                  width: 2.0, 
+                ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      decoration: BoxDecoration(
+                        color:const Color.fromARGB(255, 232, 181, 31).withOpacity(0.5),
+                        borderRadius: const BorderRadius.all(Radius.circular(20)),        
+                      ),
+                      child: Center(
+                        child: Text(
+                          DateFormat.jm().format(item.time),
+                          style: TextStyle(
+                            fontSize: 17,
+                            color: Colors.black.withOpacity(0.9),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      'edit',
+                      style: TextStyle(
+                        color: Colors.blue.withOpacity(0.5),
+                        fontWeight: FontWeight.bold
+                        ),
+                    ),
+                                                      
+                  ],
+                ),
+                const SizedBox(height:10.0,),                           
+                Text(
+                  item.medName,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black.withOpacity(0.7)
+                  ),
+                ),                           
+                const SizedBox(height:10.0,),
+                Text(
+                  item.dosage=='00' ? 'No dose added'
+                  : 'Take ${item.dosage}${item.unit} from cabinet ${alarmDetail.cabinateNum}',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.grey.withOpacity(0.9)                                   
+                  ), 
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    ),                   
+);
  }
 
   void _showPopupContainer(BuildContext context) {

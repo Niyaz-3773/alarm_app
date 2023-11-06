@@ -1,4 +1,5 @@
 import 'package:alarm_app/home_pages/paired_varidose.dart';
+import 'package:alarm_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'controller/alarm_datail_provider.dart';
@@ -20,7 +21,7 @@ class MyApp extends  StatelessWidget {
       ],
       child:const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home:PairedVaridose()  //BuyVaridosePage()
+        home:HomeScreen()// PairedVaridose()  //BuyVaridosePage()
       ),
     );
   }

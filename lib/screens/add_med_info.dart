@@ -331,8 +331,7 @@ class _AddMedState extends State<AddMed> {
             fontSize: 15,
             color:  specificDaysList.contains(value) ?Colors.black : Colors.grey,
           ),
-          ),
-          
+          ),        
         ),
     );
   }

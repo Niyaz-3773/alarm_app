@@ -86,6 +86,7 @@ class _DeviceSettingState extends State<DeviceSetting> {
               const SizedBox(height: 5,),
              
               Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 height: 80,
                 decoration: BoxDecoration(
                   borderRadius:const BorderRadius.all(Radius.circular(10)),
@@ -98,27 +99,20 @@ class _DeviceSettingState extends State<DeviceSetting> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(
-                        'Occupied cabinets',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black.withOpacity(0.8)
-                        ),
+                   Text(
+                      'Occupied cabinets',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black.withOpacity(0.8)
                       ),
-                    ),
-
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Text(
-                        '1, 2, 3, 4, 5',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black.withOpacity(0.6)
-                        ),
+                    ),                 
+                    Text(
+                      '1, 2, 3, 4, 5',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black.withOpacity(0.6)
                       ),
-                    ),
+                    ),               
                   ],
                 )
               ),
@@ -149,10 +143,10 @@ class _DeviceSettingState extends State<DeviceSetting> {
                           ),
 
                         const SizedBox(height: 15,),
-                        _alarmSetting('Alarm tune', 'Rooster'),
+                        _alarmSetting('Alarm tune'),
                         
                         const SizedBox(height: 15,),
-                        _alarmSetting('Alarm strength', 'Louder'),
+                        _alarmSetting('Alarm strengt'),
                       
                        //Snooz
                         const SizedBox(height: 15,),
@@ -332,7 +326,7 @@ class _DeviceSettingState extends State<DeviceSetting> {
     );
   }
 
-  _alarmSetting(String lable1,String lable2){
+  _alarmSetting(String lable1){
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
