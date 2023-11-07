@@ -176,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 8),
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.2,
+            height: MediaQuery.of(context).size.height * 0.18,
             padding: const EdgeInsets.fromLTRB(15,10,15,10),
             decoration: BoxDecoration(           
                 borderRadius: BorderRadius.circular(20), 

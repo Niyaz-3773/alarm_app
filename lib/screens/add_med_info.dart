@@ -284,19 +284,19 @@ class _AddMedState extends State<AddMed> {
               child:Row(
               children: [
                 _customCircle('S',0),
-                const SizedBox(width: 4,),
+                const SizedBox(width: 3,),
                 _customCircle('M',1),
-                const SizedBox(width: 4,),
+                const SizedBox(width: 3,),
                 _customCircle('T',2),
-                const SizedBox(width: 4,),
+                const SizedBox(width: 3,),
                 _customCircle('W',3),
-                const SizedBox(width: 4,),
+                const SizedBox(width: 3,),
                 _customCircle('T',4),
-                const SizedBox(width: 4,),
+                const SizedBox(width: 3,),
                 _customCircle('F',5),
-                const SizedBox(width: 4,),
+                const SizedBox(width: 3,),
                 _customCircle('S',6),
-                const SizedBox(width: 4,),                
+                const SizedBox(width: 3,),                
               ],
             )    
           ),
@@ -356,7 +356,7 @@ class _AddMedState extends State<AddMed> {
               child:Row(
               children: [
                 _intervalIncreAndDecreButton(Icons.remove),
-                const SizedBox(width: 8,),
+                const SizedBox(width: 7,),
                 Container(
                   height: 44,
                   width:MediaQuery.of(context).size.width*0.6,
@@ -376,7 +376,7 @@ class _AddMedState extends State<AddMed> {
                     ),
                   ),  
                  ),
-                 const SizedBox(width: 8,),
+                 const SizedBox(width: 7,),
                  _intervalIncreAndDecreButton(Icons.add),                                 
               ],
             )    
@@ -474,7 +474,7 @@ class _SetTimeAndDoseState extends State<SetTimeAndDose> {
   Widget build(BuildContext context) {
     return Consumer<AlarmDetailProvider>(
       builder:(context, alarmDetail, child) => SizedBox(
-        height: MediaQuery.of(context).size.height*0.6,
+        height: MediaQuery.of(context).size.height*0.55,
         child: Column(
           children: [
             Padding(

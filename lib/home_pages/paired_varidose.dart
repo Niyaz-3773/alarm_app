@@ -130,7 +130,7 @@ class _PairedVaridoseState extends State<PairedVaridose> {
               fontWeight: FontWeight.w500
             ),
           ),
-          const SizedBox(height: 7,),
+          const SizedBox(height: 10,),
           const Text(
             'No of cabinets',
             style: TextStyle(
@@ -147,7 +147,7 @@ class _PairedVaridoseState extends State<PairedVaridose> {
               fontWeight: FontWeight.w500
             ),
           ),
-          const SizedBox(height: 7,),
+          const SizedBox(height: 10,),
           const Text(
             'Firmware Version',
             style: TextStyle(
@@ -164,7 +164,7 @@ class _PairedVaridoseState extends State<PairedVaridose> {
               fontWeight: FontWeight.w500
             ),
           ),
-          const SizedBox(height: 7,),
+          const SizedBox(height: 10,),
           InkWell(
             onTap: () {
               Navigator.push(context,

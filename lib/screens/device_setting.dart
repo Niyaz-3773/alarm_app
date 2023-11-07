@@ -419,7 +419,7 @@ class _DeviceSettingState extends State<DeviceSetting> {
       builder:(context,alarmDetail,child) => Padding(
         padding:const EdgeInsets.symmetric(horizontal: 25,vertical: 20),
         child: SizedBox(
-          height: MediaQuery.of(context).size.height*0.4,
+          height: MediaQuery.of(context).size.height*0.45,
             child:Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -431,7 +431,7 @@ class _DeviceSettingState extends State<DeviceSetting> {
                 ),
                 Center(
                   child: Container(
-                   height:MediaQuery.of(context).size.height*0.3,
+                   height:MediaQuery.of(context).size.height*0.35,
                     
                     alignment: Alignment.center,
                     child: Column(

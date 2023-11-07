@@ -113,6 +113,7 @@ class BuyVaridosePage extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 2,),
         SizedBox(
           width: MediaQuery.of(context).size.width*width,
           child: Text(
