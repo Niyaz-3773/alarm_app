@@ -146,7 +146,7 @@ class _DeviceSettingState extends State<DeviceSetting> {
                         _alarmSetting('Alarm tune'),
                         
                         const SizedBox(height: 15,),
-                        _alarmSetting('Alarm strengt'),
+                        _alarmSetting('Alarm strength'),
                       
                        //Snooz
                         const SizedBox(height: 15,),
