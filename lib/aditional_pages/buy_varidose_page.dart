@@ -1,4 +1,4 @@
-import 'package:alarm_app/home_pages/faqs_screen.dart';
+import 'package:alarm_app/aditional_pages/faqs_screen.dart';
 import 'package:alarm_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 

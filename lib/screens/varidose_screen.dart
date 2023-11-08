@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controller/alarm_datail_provider.dart';
 
+@immutable
 class VaridosePage extends StatelessWidget {
-  int currentIndex;
+  final int currentIndex;
 
-  VaridosePage(this.currentIndex, {super.key});
+  const VaridosePage(this.currentIndex, {super.key});
   @override
   Widget build(BuildContext context) {
     return SafeArea(

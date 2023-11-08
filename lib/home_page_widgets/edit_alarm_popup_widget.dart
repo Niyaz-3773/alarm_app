@@ -1,14 +1,15 @@
 import 'package:alarm_app/controller/alarm_datail_provider.dart';
-import 'package:alarm_app/widgets/reschedule_alarm_bottomsheet.dart';
+import 'package:alarm_app/home_page_widgets/reschedule_alarm_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../model/alarm_dateils_model.dart';
 
+@immutable
 class EditAlarmmPopupWidget extends StatelessWidget {
-  int currentIndex;
-  EditAlarmmPopupWidget(this.currentIndex, {super.key});
+  final int currentIndex;
+ const EditAlarmmPopupWidget(this.currentIndex, {super.key});
   
 
   @override

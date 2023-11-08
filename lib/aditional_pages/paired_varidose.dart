@@ -1,5 +1,5 @@
 
-import 'package:alarm_app/home_pages/wifi_available_page.dart';
+import 'package:alarm_app/aditional_pages/wifi_available_page.dart';
 import 'package:alarm_app/model/varidose_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

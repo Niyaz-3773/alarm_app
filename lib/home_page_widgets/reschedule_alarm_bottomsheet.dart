@@ -4,10 +4,10 @@ import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 
 import '../model/alarm_dateils_model.dart';
-
+@immutable
 class RescheduleAlarmBottomsheet extends StatelessWidget {
-  int currentIndex;
-  RescheduleAlarmBottomsheet(this.currentIndex, {super.key});
+  final int currentIndex;
+  const RescheduleAlarmBottomsheet(this.currentIndex, {super.key});
 
   @override
   Widget build(BuildContext context) {

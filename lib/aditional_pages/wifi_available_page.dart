@@ -1,9 +1,10 @@
-import 'package:alarm_app/home_pages/buy_varidose_page.dart';
-import 'package:alarm_app/home_pages/paired_varidose.dart';
+import 'package:alarm_app/aditional_pages/buy_varidose_page.dart';
+import 'package:alarm_app/aditional_pages/paired_varidose.dart';
 import 'package:flutter/material.dart';
 
+@immutable
 class WifiAvailablePage extends StatelessWidget {
-  List<String> wifiAvailableList=['Free_wifi','Home_airtel','pyxell_5G'];
+  final List<String> wifiAvailableList=['Free_wifi','Home_airtel','pyxell_5G'];
 
   WifiAvailablePage({super.key});
   @override
