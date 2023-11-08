@@ -77,10 +77,15 @@ class _AddMedState extends State<AddMed> {
                 dosage:alarmDetail.dosage,
                 unit:alarmDetail.unit,
                 time : alarmDetail.time,
+                cabinetID: 0,
+                medTaken: false,
+                rescheduleHour: 0,
+                rescheduleMin: 0,
               );
-              alarmDetail.addAlarm(alarm);
+              alarmDetail.addAlarm(alarm);  //adding to list
+              int index=alarmDetail.alarmList.length-1;  // rturning current added index
                Navigator.push(context,
-                MaterialPageRoute(builder: (context) =>const VaridosePage())  
+                MaterialPageRoute(builder: (context) => VaridosePage( index))  
               );
             }, 
             child:const Text(

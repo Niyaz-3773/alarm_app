@@ -4,14 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controller/alarm_datail_provider.dart';
 
-class VaridosePage extends StatefulWidget {
-  const VaridosePage({super.key});
+class VaridosePage extends StatelessWidget {
+  int currentIndex;
 
-  @override
-  State<VaridosePage> createState() => _VaridosePageState();
-}
-
-class _VaridosePageState extends State<VaridosePage> {
+  VaridosePage(this.currentIndex, {super.key});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -74,27 +70,27 @@ class _VaridosePageState extends State<VaridosePage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            _buildCabinetNumContainer('1'),
-                            _buildCabinetNumContainer('2'),
-                            _buildCabinetNumContainer('3'),
+                            _buildCabinetNumContainer('1',1),
+                            _buildCabinetNumContainer('2',2),
+                            _buildCabinetNumContainer('3',3),
                           ],
                         ),
                         const SizedBox(height: 15,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            _buildCabinetNumContainer('4'),
-                            _buildCabinetNumContainer('5'),
-                            _buildCabinetNumContainer('6'),
+                            _buildCabinetNumContainer('4',4),
+                            _buildCabinetNumContainer('5',5),
+                            _buildCabinetNumContainer('6',6),
                           ],
                         ),
                         const SizedBox(height: 15,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            _buildCabinetNumContainer('7'),
-                            _buildCabinetNumContainer('8'),
-                            _buildCabinetNumContainer('9'),
+                            _buildCabinetNumContainer('7',7),
+                            _buildCabinetNumContainer('8',8),
+                            _buildCabinetNumContainer('9',9),
                           ],
                         ),
                       ],
@@ -193,19 +189,19 @@ class _VaridosePageState extends State<VaridosePage> {
       );
   }
 
-  _buildCabinetNumContainer(String text){
+  _buildCabinetNumContainer(String text, int id){
     return Consumer<AlarmDetailProvider>(
       builder:(context,alarmDetails,child) => GestureDetector(
         onTap: () {
-            alarmDetails.setCabinateNum(text);
+            alarmDetails.setCabinateID(currentIndex, id);
         },
         child: Container(
         width: 95,
         height: 35,
         decoration: BoxDecoration(
-          color:alarmDetails.cabinateNum == text ?const Color.fromARGB(255, 97, 232, 234) :  Colors.white,
+          color:alarmDetails.alarmList[currentIndex].cabinetID == id ?const Color.fromARGB(255, 97, 232, 234) :  Colors.white,
           borderRadius:const BorderRadius.all(Radius.circular(20)),
-          border: alarmDetails.cabinateNum==text ? null :Border.all(
+          border: alarmDetails.alarmList[currentIndex].cabinetID == id ? null :Border.all(
             color: Colors.black.withOpacity(0.2),
             width: 1.0,
           ),
@@ -216,7 +212,7 @@ class _VaridosePageState extends State<VaridosePage> {
             style:  TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16,
-            color: alarmDetails.cabinateNum == text ? Colors.black : Colors.grey,
+            color: alarmDetails.alarmList[currentIndex].cabinetID == id ? Colors.black : Colors.grey,
           ),
           ),
         ),       

@@ -1,5 +1,6 @@
 
 import 'package:alarm_app/home_pages/wifi_available_page.dart';
+import 'package:alarm_app/model/varidose_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -12,8 +13,13 @@ class PairedVaridose extends StatefulWidget {
 }
 
 class _PairedVaridoseState extends State<PairedVaridose> {
-  List<String> deviceList=['XX77779999ZZ','MN88993374OZ','RS90972170UA'];
-  String? serialNum;
+  List<VaridoseModel> varidoseList=[
+    VaridoseModel(varidoseName: 'Varidose', serialNum: 'XX77779999ZZ'),
+    VaridoseModel(varidoseName: 'Varidose', serialNum: 'MN88993374OZ'),
+    VaridoseModel(varidoseName: 'Varidose', serialNum: 'RS90972170UA'),
+  ];
+
+  String? tappedSerialNum;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,8 +42,9 @@ class _PairedVaridoseState extends State<PairedVaridose> {
           width: MediaQuery.of(context).size.height,
           padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.05),
           child: ListView.builder(
-            itemCount: deviceList.length,
+            itemCount: varidoseList.length,
             itemBuilder: (BuildContext context, index) {
+              VaridoseModel item = varidoseList[index];
               return Column(
                 children: [
                   Container(
@@ -61,17 +68,17 @@ class _PairedVaridoseState extends State<PairedVaridose> {
                           width: 40,  
                           height: 40, 
                         ),
-                        title: const Text(
-                          'Varidose',
-                          style: TextStyle(
+                        title: Text(
+                          item.varidoseName,
+                          style:const TextStyle(
                             fontSize: 19,
                             color: Colors.black,
                             fontWeight: FontWeight.w400
                           ),
                         ),
                         subtitle:Text(
-                          deviceList[index],
-                          style: const TextStyle(
+                          item.serialNum,
+                          style:const TextStyle(
                             fontSize: 15,
                             color:Colors.grey
                           ),
@@ -79,7 +86,7 @@ class _PairedVaridoseState extends State<PairedVaridose> {
                         trailing: IconButton(
                           onPressed:(() {
                               setState(() {
-                                serialNum=deviceList[index];
+                                tappedSerialNum=item.serialNum;
                               });
                           }) , 
                           icon: const Icon(Icons.keyboard_arrow_down,color: Color.fromARGB(255, 97, 232, 234),size: 30,)
@@ -88,8 +95,8 @@ class _PairedVaridoseState extends State<PairedVaridose> {
                     ),
                   ),
                   const SizedBox(height: 7,),
-                  if(serialNum==deviceList[index])
-                    _deviceDetails(deviceList[index]),
+                  if(tappedSerialNum==item.serialNum)
+                    _deviceDetails(item.serialNum),
 
                 ],
               );
