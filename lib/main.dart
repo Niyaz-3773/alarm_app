@@ -21,7 +21,7 @@ class MyApp extends  StatelessWidget {
       ],
       child:const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home:HomeScreen()// PairedVaridose()  //BuyVaridosePage()
+        home: PairedVaridose()  //BuyVaridosePage()
       ),
     );
   }

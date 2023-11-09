@@ -119,7 +119,7 @@ class _DeviceSettingState extends State<DeviceSetting> {
 
               //Alarm Setting
                 const SizedBox(height: 20,),
-                const AlarmSetting(),
+                 AlarmSetting(),
 
               ],
             ),

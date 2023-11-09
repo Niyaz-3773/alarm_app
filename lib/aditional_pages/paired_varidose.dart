@@ -1,8 +1,11 @@
 
+import 'package:alarm_app/aditional_pages/remove_varidose_bottomsheet.dart';
 import 'package:alarm_app/aditional_pages/wifi_available_page.dart';
+import 'package:alarm_app/controller/varidose_controller.dart';
 import 'package:alarm_app/model/varidose_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 
 class PairedVaridose extends StatefulWidget {
@@ -13,13 +16,9 @@ class PairedVaridose extends StatefulWidget {
 }
 
 class _PairedVaridoseState extends State<PairedVaridose> {
-  List<VaridoseModel> varidoseList=[
-    VaridoseModel(varidoseName: 'Varidose', serialNum: 'XX77779999ZZ'),
-    VaridoseModel(varidoseName: 'Varidose', serialNum: 'MN88993374OZ'),
-    VaridoseModel(varidoseName: 'Varidose', serialNum: 'RS90972170UA'),
-  ];
-
+  VaridoseController varidoseController=Get.put(VaridoseController());
   String? tappedSerialNum;
+  bool tappedEdit=false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,17 +33,34 @@ class _PairedVaridoseState extends State<PairedVaridose> {
               fontSize: 16
             ),
           ), 
-          centerTitle: true,        
+          centerTitle: true,
+          actions: [
+            TextButton(
+            onPressed: (){
+               setState(() {
+                 tappedEdit=!tappedEdit;
+               });
+            }, 
+            child:const Text(
+              'Edit',
+              style: TextStyle(
+                color:Color.fromARGB(255, 97, 232, 234),
+                fontSize: 16
+                ),
+              )
+            )
+          ],        
         ),
-        body:Container(
+        body:Obx(
+          () => Container(
           color: Colors.white,
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.height,
           padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.05),
           child: ListView.builder(
-            itemCount: varidoseList.length,
+            itemCount: varidoseController.varidoseList.length,
             itemBuilder: (BuildContext context, index) {
-              VaridoseModel item = varidoseList[index];
+              VaridoseModel item = varidoseController.varidoseList[index];
               return Column(
                 children: [
                   Container(
@@ -83,7 +99,21 @@ class _PairedVaridoseState extends State<PairedVaridose> {
                             color:Colors.grey
                           ),
                         ),
-                        trailing: IconButton(
+                        trailing: tappedEdit
+                        ?TextButton(
+                          onPressed: () {
+                            showBottomSheet(index);
+                          },
+                          child: const Text(
+                            'Remove',
+                            style: TextStyle(
+                              color:Colors.red,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600
+                            ),
+                          ),
+                        )     
+                        : IconButton(
                           onPressed:(() {
                               setState(() {
                                 tappedSerialNum=item.serialNum;
@@ -96,18 +126,18 @@ class _PairedVaridoseState extends State<PairedVaridose> {
                   ),
                   const SizedBox(height: 7,),
                   if(tappedSerialNum==item.serialNum)
-                    _deviceDetails(item.serialNum),
-
+                    deviceDetails(item.serialNum),
                 ],
               );
             }),       
         ),
+        )
       ), 
     );
   }
  
 
-  _deviceDetails(String serialNum){
+  deviceDetails(String serialNum){
     return Container(
       height: MediaQuery.of(context).size.height*0.4,
       padding: const EdgeInsets.symmetric(horizontal: 60,vertical: 15),
@@ -196,6 +226,21 @@ class _PairedVaridoseState extends State<PairedVaridose> {
           )
         ],
       ),
+    );
+  }
+
+  showBottomSheet(int index){
+    showModalBottomSheet(
+      context: context,
+      shape:const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+      ),
+      builder: (context) {
+        return RemoveVaridoseBottomsheet(index);      
+      },
     );
   }
 }

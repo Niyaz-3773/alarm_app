@@ -50,8 +50,8 @@ class InitialHomeWidget extends StatelessWidget {
               children: [
                 Image.asset(
                   'assets/images/cabinet.jpg',
-                  height:100,
-                  width: 100,
+                  height:MediaQuery.of(context).size.height*0.15,
+                  width: MediaQuery.of(context).size.height*0.15,
                 ),
                 const  Text(
                   'Pair your device',

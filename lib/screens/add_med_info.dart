@@ -83,7 +83,7 @@ class _AddMedState extends State<AddMed> {
                 rescheduleMin: 0,
               );
               alarmDetail.addAlarm(alarm);  //adding to list
-              int index=alarmDetail.alarmList.length-1;  // rturning current added index
+              int index=alarmDetail.alarmList.length-1;  // returning current added index
                Navigator.push(context,
                 MaterialPageRoute(builder: (context) => VaridosePage( index))  
               );

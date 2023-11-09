@@ -1,11 +1,10 @@
+import 'package:alarm_app/controller/alarm_setting_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../controller/alarm_datail_provider.dart';
+import 'package:get/get.dart';
 import 'alarm_setting_bottomsheet.dart';
 
 class AlarmSetting extends StatelessWidget {
-  const AlarmSetting({super.key});
-
+  AlarmSettingController settingController=Get.put(AlarmSettingController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -102,8 +101,8 @@ class AlarmSetting extends StatelessWidget {
               _showAlarmStrengthBottomSheet(context);
             }    
           },         
-          child: Consumer<AlarmDetailProvider>(
-            builder:(context, alarmDetail, child) =>  Container(
+          child: Obx(
+            () =>  Container(
               height: 60,
               decoration: BoxDecoration(
                 borderRadius:const BorderRadius.all(Radius.circular(20)),
@@ -120,8 +119,8 @@ class AlarmSetting extends StatelessWidget {
                   children:[
                     Text(
                       lable1=='Alarm tune'
-                      ? alarmDetail.selectedTune
-                      :alarmDetail.selectedStrength,
+                      ? settingController.selectedTune.value
+                      : settingController.selectedStrength.value,
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 18,

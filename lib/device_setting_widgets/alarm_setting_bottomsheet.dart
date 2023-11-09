@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
+import '../controller/alarm_setting_controller.dart';
 
-import '../controller/alarm_datail_provider.dart';
-
-@immutable
 class AlarmSettingBottomsheet extends StatelessWidget {
   final String title;
   final String lable1;
   final String lable2;
   final String lable3;
   
-  AlarmSettingBottomsheet(this.title,this.lable1,this.lable2,this.lable3);
+  AlarmSettingBottomsheet(this.title,this.lable1,this.lable2,this.lable3, {super.key});
+
+  AlarmSettingController settingController=Get.put(AlarmSettingController());
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AlarmDetailProvider>(
-      builder:(context,alarmDetail,child) => Padding(
+    return Obx(
+      ()=> Padding(
         padding:const EdgeInsets.symmetric(horizontal: 25,vertical: 20),
         child: SizedBox(
           height: MediaQuery.of(context).size.height*0.45,
@@ -48,16 +48,16 @@ class AlarmSettingBottomsheet extends StatelessWidget {
                         TextButton(
                           onPressed: () {
                             if(title=='Select tune'){
-                               alarmDetail.selectTune(lable1);
+                               settingController.selectTune(lable1);
                             }else{
-                                alarmDetail.selectStrength(lable1);
+                                settingController.selectStrength(lable1);
                             }
                           },
                           child: Text(
                             lable1,
                             style: TextStyle(
                               fontSize: 15,
-                              color:  alarmDetail.selectedStrength==lable1 || alarmDetail.selectedTune==lable1
+                              color:  settingController.selectedStrength.value == lable1 || settingController.selectedTune.value == lable1
                               ? Colors.black
                               : Colors.black.withOpacity(0.3),
                               fontWeight: FontWeight.w500
@@ -79,16 +79,16 @@ class AlarmSettingBottomsheet extends StatelessWidget {
                         TextButton(
                           onPressed: () {
                             if(title=='Select tune'){
-                               alarmDetail.selectTune(lable2);
+                               settingController.selectTune(lable2);
                             }else{
-                                alarmDetail.selectStrength(lable2);
+                                settingController.selectStrength(lable2);
                             }
                           },
                           child: Text(
                             lable2,
                             style: TextStyle(
                               fontSize: 15,
-                              color:  alarmDetail.selectedStrength==lable2 || alarmDetail.selectedTune==lable2
+                              color:  settingController.selectedStrength.value == lable2|| settingController.selectedTune.value==lable2
                               ? Colors.black
                               : Colors.black.withOpacity(0.3),
                               fontWeight: FontWeight.w500
@@ -109,16 +109,16 @@ class AlarmSettingBottomsheet extends StatelessWidget {
                         TextButton(
                           onPressed: () {
                             if(title=='Select tune'){
-                               alarmDetail.selectTune(lable3);
+                               settingController.selectTune(lable3);
                             }else{
-                                alarmDetail.selectStrength(lable3);
+                                settingController.selectStrength(lable3);
                             }
                           },
                           child: Text(
                             lable3,
                             style: TextStyle(
                               fontSize: 15,
-                              color:  alarmDetail.selectedStrength==lable3 || alarmDetail.selectedTune==lable3
+                              color:  settingController.selectedStrength.value == lable3|| settingController.selectedTune.value==lable3
                               ? Colors.black
                               : Colors.black.withOpacity(0.3),
                               fontWeight: FontWeight.w500
@@ -133,7 +133,7 @@ class AlarmSettingBottomsheet extends StatelessWidget {
               ],
             ) ,
         ),
-      ),
+      )
     );
   }
 }
