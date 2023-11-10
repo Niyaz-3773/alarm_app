@@ -8,10 +8,15 @@ class VaridoseController extends GetxController{
     VaridoseModel(varidoseName: 'Varidose', serialNum: 'MN88993374OZ'),
     VaridoseModel(varidoseName: 'Varidose', serialNum: 'RS90972170UA'),
   ].obs;
+    Rx<int> currentIndex=(-1).obs;
 
   void removeVaridoseAt(int index){
     varidoseList.removeAt(index);
     update();
   }
-
+  
+  void setIndex(int index){
+    currentIndex.value=index;
+    update();
+  }
 }

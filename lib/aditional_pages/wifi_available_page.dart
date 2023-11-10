@@ -238,7 +238,7 @@ class WifiAvailablePage extends StatelessWidget {
                   TextButton(
                     onPressed: (){
                       Navigator.push(context,
-                      MaterialPageRoute(builder: (context) =>const PairedVaridose())
+                      MaterialPageRoute(builder: (context) => PairedVaridose())
                       );
                     }, 
                     child: const Text(

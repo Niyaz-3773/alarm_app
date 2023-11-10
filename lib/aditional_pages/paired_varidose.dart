@@ -17,7 +17,7 @@ class PairedVaridose extends StatefulWidget {
 
 class _PairedVaridoseState extends State<PairedVaridose> {
   VaridoseController varidoseController=Get.put(VaridoseController());
-  String? tappedSerialNum;
+  
   bool tappedEdit=false;
   @override
   Widget build(BuildContext context) {
@@ -37,9 +37,9 @@ class _PairedVaridoseState extends State<PairedVaridose> {
           actions: [
             TextButton(
             onPressed: (){
-               setState(() {
-                 tappedEdit=!tappedEdit;
-               });
+              //  setState(() {
+              //    tappedEdit=!tappedEdit;
+              //  });
             }, 
             child:const Text(
               'Edit',
@@ -51,13 +51,15 @@ class _PairedVaridoseState extends State<PairedVaridose> {
             )
           ],        
         ),
-        body:Obx(
-          () => Container(
+        body: Container(
           color: Colors.white,
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.height,
           padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.05),
-          child: ListView.builder(
+          child: Obx(
+            (() {
+              //print('Rebuilding Obx: ${varidoseController.currentIndex.value}');
+              return  ListView.builder(
             itemCount: varidoseController.varidoseList.length,
             itemBuilder: (BuildContext context, index) {
               VaridoseModel item = varidoseController.varidoseList[index];
@@ -77,7 +79,6 @@ class _PairedVaridoseState extends State<PairedVaridose> {
                         ),
                       ],
                     ),
-                    child: Center(
                       child: ListTile(
                         leading: SvgPicture.asset(
                           'assets/images/box.svg',
@@ -115,24 +116,25 @@ class _PairedVaridoseState extends State<PairedVaridose> {
                         )     
                         : IconButton(
                           onPressed:(() {
-                              setState(() {
-                                tappedSerialNum=item.serialNum;
-                              });
+                              varidoseController.setIndex(index);
                           }) , 
                           icon: const Icon(Icons.keyboard_arrow_down,color: Color.fromARGB(255, 97, 232, 234),size: 30,)
                         )
                       ),
-                    ),
                   ),
-                  const SizedBox(height: 7,),
-                  if(tappedSerialNum==item.serialNum)
-                    deviceDetails(item.serialNum),
+                   const SizedBox(height: 7,),
+                    if (varidoseController.currentIndex.value == index)
+                    deviceDetails(item.serialNum), 
+                                
                 ],
               );
-            }),       
+
+            });
+          }
+          )       
         ),
-        )
       ), 
+    )
     );
   }
  
