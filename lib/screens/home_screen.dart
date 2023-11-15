@@ -1,3 +1,4 @@
+import 'package:alarm_app/aditional_pages/contactus_page.dart';
 import 'package:alarm_app/screens/add_med_info.dart';
 import 'package:alarm_app/screens/device_setting.dart';
 import 'package:alarm_app/home_page_widgets/alarm_added_widget.dart';
@@ -33,9 +34,9 @@ class HomeScreen extends StatelessWidget {
                   onTap: () {
                     
                   },
-                  child: Row(
+                  child:const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children:const [
+                    children:[
                       Icon(Icons.add_box,
                         color:Color.fromARGB(255, 97, 232, 234)
                       ),
@@ -59,7 +60,11 @@ class HomeScreen extends StatelessWidget {
         //bottom Nav Bar
         bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
-          if(index==2){
+          if(index==1){
+            Navigator.push(context,
+            MaterialPageRoute(builder: (context) =>const ContactUsPage())
+            );
+          }else if(index==2){
             Navigator.push(context,
             MaterialPageRoute(builder: (context) =>const AddMed())
             );

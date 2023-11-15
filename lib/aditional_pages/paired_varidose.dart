@@ -18,11 +18,12 @@ class PairedVaridose extends StatefulWidget {
 class _PairedVaridoseState extends State<PairedVaridose> {
   VaridoseController varidoseController=Get.put(VaridoseController());
   
-  bool tappedEdit=false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child:Scaffold(
+      child:Obx(
+        () {
+          return Scaffold(
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
@@ -37,13 +38,12 @@ class _PairedVaridoseState extends State<PairedVaridose> {
           actions: [
             TextButton(
             onPressed: (){
-              //  setState(() {
-              //    tappedEdit=!tappedEdit;
-              //  });
+              varidoseController.removeVaridose.toggle();
             }, 
-            child:const Text(
-              'Edit',
-              style: TextStyle(
+            child:Text(
+              varidoseController.removeVaridose.value 
+              ? 'Done': 'Edit',
+              style: const TextStyle(
                 color:Color.fromARGB(255, 97, 232, 234),
                 fontSize: 16
                 ),
@@ -56,85 +56,87 @@ class _PairedVaridoseState extends State<PairedVaridose> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.height,
           padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.05),
-          child: Obx(
-            (() {
-              //print('Rebuilding Obx: ${varidoseController.currentIndex.value}');
-              return  ListView.builder(
+          child:  ListView.builder(
             itemCount: varidoseController.varidoseList.length,
             itemBuilder: (BuildContext context, index) {
               VaridoseModel item = varidoseController.varidoseList[index];
-              return Column(
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height*0.12,
-                    decoration: BoxDecoration(                
-                      borderRadius:const BorderRadius.all(Radius.circular(20)),
-                      color: Colors.white,
-                        boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 3,
-                          offset:const Offset(0, 4), 
+              return Obx(
+                () {
+                  return Column(
+                    children: [
+                      Container(
+                        height: MediaQuery.of(context).size.height*0.12,
+                        decoration: BoxDecoration(                
+                          borderRadius:const BorderRadius.all(Radius.circular(20)),
+                          color: Colors.white,
+                            boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.1),
+                              spreadRadius: 1,
+                              blurRadius: 3,
+                              offset:const Offset(0, 4), 
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                      child: ListTile(
-                        leading: SvgPicture.asset(
-                          'assets/images/box.svg',
-                          width: 40,  
-                          height: 40, 
-                        ),
-                        title: Text(
-                          item.varidoseName,
-                          style:const TextStyle(
-                            fontSize: 19,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400
-                          ),
-                        ),
-                        subtitle:Text(
-                          item.serialNum,
-                          style:const TextStyle(
-                            fontSize: 15,
-                            color:Colors.grey
-                          ),
-                        ),
-                        trailing: tappedEdit
-                        ?TextButton(
-                          onPressed: () {
-                            showBottomSheet(index);
-                          },
-                          child: const Text(
-                            'Remove',
-                            style: TextStyle(
-                              color:Colors.red,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600
+                          child: Center(
+                            child: ListTile(
+                              leading: SvgPicture.asset(
+                                'assets/images/box.svg',
+                                width: 40,  
+                                height: 40, 
+                              ),
+                              title: Text(
+                                item.varidoseName,
+                                style:const TextStyle(
+                                  fontSize: 19,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400
+                                ),
+                              ),
+                              subtitle:Text(
+                                item.serialNum,
+                                style:const TextStyle(
+                                  fontSize: 15,
+                                  color:Colors.grey
+                                ),
+                              ),
+                              trailing: varidoseController.removeVaridose.value
+                              ?TextButton(
+                                onPressed: () {
+                                  showBottomSheet(index);
+                                },
+                                child: const Text(
+                                  'Remove',
+                                  style: TextStyle(
+                                    color:Colors.red,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600
+                                  ),
+                                ),
+                              )     
+                              : IconButton(
+                                onPressed:(() {
+                                    varidoseController.setIndex(index);
+                                    varidoseController.showDeviceDetail.toggle();
+                                }) , 
+                                icon: const Icon(Icons.keyboard_arrow_down,color: Color.fromARGB(255, 97, 232, 234),size: 30,)
+                              )
                             ),
                           ),
-                        )     
-                        : IconButton(
-                          onPressed:(() {
-                              varidoseController.setIndex(index);
-                          }) , 
-                          icon: const Icon(Icons.keyboard_arrow_down,color: Color.fromARGB(255, 97, 232, 234),size: 30,)
-                        )
                       ),
-                  ),
-                   const SizedBox(height: 7,),
-                    if (varidoseController.currentIndex.value == index)
-                    deviceDetails(item.serialNum), 
-                                
-                ],
+                        const SizedBox(height: 7,),
+                        if (varidoseController.currentIndex.value == index && varidoseController.showDeviceDetail.value)
+                        deviceDetails(item.serialNum),                           
+                    ],
+                  );
+                } 
               );
 
-            });
-          }
-          )       
-        ),
+            })     
       ), 
-    )
+    );
+        }
+      )
     );
   }
  

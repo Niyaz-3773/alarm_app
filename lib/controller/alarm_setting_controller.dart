@@ -8,11 +8,9 @@ class AlarmSettingController extends GetxController{
 
    void selectStrength(String value){
     selectedStrength.value=value;
-    update();
   }
 
   void selectTune(String value){
     selectedTune.value=value;
-    update();
   }
 }
